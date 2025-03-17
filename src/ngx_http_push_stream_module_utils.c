@@ -1884,17 +1884,17 @@ ngx_http_push_stream_get_last_received_message_values(ngx_http_request_t *r, tim
     }
 
     if (cf->last_event_id != NULL) {
-        if (ngx_http_push_stream_complex_value(r, cf->last_event_id, &vv_event_id) == NGX_OK) 
-		{
+        if (ngx_http_push_stream_complex_value(r, cf->last_event_id, &vv_event_id) == NGX_OK) {
 		if (vv_event_id.len) {
 		    *last_event_id = ngx_http_push_stream_create_str(ctx->temp_pool, vv_event_id.len);
 		    ngx_memcpy(((ngx_str_t *)*last_event_id)->data, vv_event_id.data, vv_event_id.len);
 		}
-	else 	
-		{
-        	ngx_log_error(NGX_LOG_ERR, r->connection->log, 0, "push stream module: failed to push stream complex value cf->last_event_id");
+		else {
+        	     ngx_log_error(NGX_LOG_ERR, r->connection->log, 0, "push stream module: failed to push stream complex value cf->last_event_id");
         	}
-    } else {
+    	}
+    }
+    else {
         *last_event_id = ngx_http_push_stream_get_header(r, &NGX_HTTP_PUSH_STREAM_HEADER_LAST_EVENT_ID);
     }
 
